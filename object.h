@@ -38,8 +38,6 @@ public:
         switch (type) {
             case 0:
                 object::rock_amount++;
-
-                //shape.setTexture(&rock_texture);
                 this->shape.setFillColor(Color::Red);
                 {
                     const std::uniform_real_distribution<float> dist_x(0.f, WIN_LENGTH - 1);
@@ -51,22 +49,17 @@ public:
 
             case 2:
                 object::scissor_amount++;
-
-                //shape.setTexture(&scissor_texture);
                 this->shape.setFillColor(Color::White);
                 {
                     const std::uniform_real_distribution<float> dist_x(WIN_LENGTH / 4.f, 3.f * WIN_LENGTH / 4.f);
                     const std::uniform_real_distribution<float> dist_y(110.f, WIN_HEIGHT / 4.f);
                     shape.setPosition({dist_x(gen), dist_y(gen)});
                 }
-                //this->shape.setRadius(15.f);
                 this->type = 2;
                 break;
 
             case 1:
                 object::paper_amount++;
-
-                //shape.setTexture(&paper_texture);
                 {
                     const std::uniform_real_distribution<float> dist_x(WIN_LENGTH / 2.f, WIN_LENGTH);
                     const std::uniform_real_distribution<float> dist_y(110.f, WIN_HEIGHT);
@@ -141,6 +134,7 @@ inline void object::convert_to(const uint8_t new_type) {
         case 2:
             object::scissor_amount--;
             break;
+        default: break;
     }
 
     this->type = new_type;
