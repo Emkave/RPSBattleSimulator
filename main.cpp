@@ -24,6 +24,14 @@ int main(void) {
 
     const Font font ("../assets/arial.ttf");
 
+    std::vector<object> objects;
+    for (int i=0; i<10; i++) {
+        objects.emplace_back(1);
+    }
+
+    Clock clock;
+    clock.start();
+
     while (window.isOpen()) {
         while (const std::optional event = window.pollEvent()) {
             if (event->is<Event::Closed>()) {
@@ -31,8 +39,13 @@ int main(void) {
             }
         }
         window.clear(Color::Black);
-
         window.draw(lines);
+
+        const size_t dt = clock.restart().asMilliseconds();
+        for (unsigned i=0; i<10; i++) {
+            objects[i].update(dt);
+            window.draw(objects[i].get_shape());
+        }
 
         window.display();
     }
